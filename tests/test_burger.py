@@ -1,7 +1,7 @@
-import pytest
+﻿import pytest
 
 from praktikum.burger import Burger
-from tests.helpers import create_bun, create_ingredient
+from helpers import create_bun, create_ingredient
 
 class TestBurger:
 
@@ -27,13 +27,13 @@ class TestBurger:
 
     def test_remove_ingredient(self):
         burger = Burger()
-        first = create_ingredient(name="Первый")
-        second = create_ingredient(name="Второй")
+        first = create_ingredient(name="РџРµСЂРІС‹Р№")
+        second = create_ingredient(name="Соус")
         burger.add_ingredient(first)
         burger.add_ingredient(second)
         burger.remove_ingredient(0)
         assert burger.ingredients == [second]
-        assert burger.ingredients[0].get_name() == "Второй"
+        assert burger.ingredients[0].get_name() == "Соус"
 
     @pytest.mark.parametrize("index, new_index, expected",
         [
@@ -71,17 +71,19 @@ class TestBurger:
 
     def test_get_receipt(self):
         burger = Burger()
-        burger.set_buns(create_bun(name="Флюоресцентная булочка", price=100))
-        burger.add_ingredient(create_ingredient("SAUCE", "Сырный", 50))
-        burger.add_ingredient(create_ingredient("FILLING", "Котлета", 100))
+        burger.set_buns(create_bun(name="Р¤Р»СЋРѕСЂРµСЃС†РµРЅС‚РЅР°СЏ Р±СѓР»РѕС‡РєР°", price=100))
+        burger.add_ingredient(create_ingredient("SAUCE", "РЎС‹СЂРЅС‹Р№", 50))
+        burger.add_ingredient(create_ingredient("FILLING", "РљРѕС‚Р»РµС‚Р°", 100))
 
         expected_receipt = (
-            "(==== Флюоресцентная булочка ====)\n"
-            "= sauce Сырный =\n"
-            "= filling Котлета =\n"
-            "(==== Флюоресцентная булочка ====)\n"
+            "(==== Р¤Р»СЋРѕСЂРµСЃС†РµРЅС‚РЅР°СЏ Р±СѓР»РѕС‡РєР° ====)\n"
+            "= sauce РЎС‹СЂРЅС‹Р№ =\n"
+            "= filling РљРѕС‚Р»РµС‚Р° =\n"
+            "(==== Р¤Р»СЋРѕСЂРµСЃС†РµРЅС‚РЅР°СЏ Р±СѓР»РѕС‡РєР° ====)\n"
             "\n"
             "Price: 350"
         )
 
         assert burger.get_receipt() == expected_receipt
+
+
